@@ -3,8 +3,9 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'Eden Site',
     'description' => 'Site package for Eden with custom content elements',
     'category' => 'templates',
-    'author' => 'Your Name',
-    'author_email' => 'your.email@example.com',
+    'author' => 'Mwayi Anyula',
+    'author_email' => 'mwai3d@gmail.com',
+    'author_company' => 'Mwayi Anyula',
     'state' => 'stable',
     'version' => '1.0.0',
     'constraints' => [
@@ -14,5 +15,10 @@ $EM_CONF[$_EXTKEY] = [
         ],
         'conflicts' => [],
         'suggests' => [],
+    ],
+    'autoload' => [
+        'psr-4' => [
+            'MwayiAnyula\\EdenSite\\' => 'Classes',
+        ],
     ],
 ];

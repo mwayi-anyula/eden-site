@@ -3,6 +3,7 @@
     "description": "Eden Site Package",
     "type": "typo3-cms-extension",
     "license": "GPL-2.0-or-later",
+    "homepage": "https://mwayianyula.com",
     "require": {
         "typo3/cms-core": "^13.0",
         "typo3/cms-fluid-styled-content": "^13.0"
@@ -16,5 +17,11 @@
         "typo3/cms": {
             "extension-key": "eden_site"
         }
+    },
+    "repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/mwayi-anyula/eden-site"
     }
+]
 }
