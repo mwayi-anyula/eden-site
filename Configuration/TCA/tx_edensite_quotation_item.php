@@ -1,4 +1,6 @@
 <?php
+use TYPO3\CMS\Core\Resource\Rendering\RendererRegistry;
+use TYPO3\CMS\Core\Resource\File;
 return [
     'ctrl' => [
         'title' => 'Quotation Item',
@@ -48,13 +50,20 @@ return [
         ],
         'image' => [
             'label' => 'Image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+            'config' => \TYPO3\CMS\Core\Resource\Rendering\RendererRegistry::getFileFieldTCAConfig(
                 'image',
                 [
                     'appearance' => [
                         'createNewRelationLinkTitle' => 'Add image reference',
                     ],
                     'maxitems' => 1,
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => 'title,alternative,crop',
+                            ],
+                        ],
+                    ],
                 ],
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             ),
