@@ -1,0 +1,38 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="eden-slider relative">
+    <div class="eden-slider-container overflow-hidden">
+        <div class="eden-slider-track flex transition-transform duration-300 ease-in-out" style="width: {items -> f:count()}00%">
+            <f:for each="{items}" as="item" iteration="iterator">
+                <div class="eden-slide w-full flex-shrink-0 p-4">
+                    <f:if condition="{item.image}">
+                        <div class="eden-slide-image mb-4">
+                            <f:image image="{item.image}" width="800" class="rounded-lg shadow-md"/>
+                        </div>
+                    </f:if>
+                    <div class="eden-slide-content">
+                        <h3 class="text-2xl font-bold mb-2">{item.title}</h3>
+                        <f:if condition="{item.description}">
+                            <div class="prose max-w-none">
+                                <f:format.html>{item.description}</f:format.html>
+                            </div>
+                        </f:if>
+                        <f:if condition="{item.link}">
+                            <a href="{item.link}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                                Read more
+                            </a>
+                        </f:if>
+                    </div>
+                </div>
+            </f:for>
+        </div>
+    </div>
+    <f:if condition="{items -> f:count()} > 1">
+        <button class="eden-slider-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 focus:outline-none">
+            ←
+        </button>
+        <button class="eden-slider-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 focus:outline-none">
+            →
+        </button>
+    </f:if>
+</div>
+</html>

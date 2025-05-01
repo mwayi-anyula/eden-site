@@ -1,0 +1,105 @@
+tt_content {
+    eden_slider =< lib.contentElement
+    eden_slider {
+        templateName = Slider
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            10 {
+                table = tx_edensite_slider_item
+                pidInList.field = pid
+                where {
+                    data = field:uid
+                    intval = 1
+                    wrap = parentid=|
+                }
+                orderBy = sorting
+                as = items
+            }
+        }
+    }
+    
+    eden_lightbox =< lib.contentElement
+    eden_lightbox {
+        templateName = Lightbox
+    }
+    
+    eden_blog =< lib.contentElement
+    eden_blog {
+        templateName = Blog
+        dataProcessing {
+            10 = Vendor\EdenSite\DataProcessing\BlogProcessor
+        }
+    }
+    
+    eden_quotations =< lib.contentElement
+    eden_quotations {
+        templateName = Quotations
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            10 {
+                table = tx_edensite_quotation_item
+                pidInList.field = pid
+                where {
+                    data = field:uid
+                    intval = 1
+                    wrap = parentid=|
+                }
+                orderBy = sorting
+                as = items
+            }
+        }
+    }
+    
+    eden_maps =< lib.contentElement
+    eden_maps {
+        templateName = Maps
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            10 {
+                table = tx_edensite_map_marker
+                pidInList.field = pid
+                where {
+                    data = field:uid
+                    intval = 1
+                    wrap = parentid=|
+                }
+                orderBy = sorting
+                as = markers
+            }
+        }
+    }
+    
+    eden_team =< lib.contentElement
+    eden_team {
+        templateName = Team
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            10 {
+                table = tx_edensite_team_member
+                pidInList.field = pid
+                where {
+                    data = field:uid
+                    intval = 1
+                    wrap = parentid=|
+                }
+                orderBy = sorting
+                as = members
+                
+                dataProcessing {
+                    10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+                    10 {
+                        table = tx_edensite_social_link
+                        pidInList.field = pid
+                        where {
+                            data = field:uid
+                            intval = 1
+                            wrap = parentid=|
+                        }
+                        orderBy = sorting
+                        as = social_links
+                    }
+                }
+            }
+        }
+    }
+}

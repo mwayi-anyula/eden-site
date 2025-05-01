@@ -1,0 +1,108 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="eden-map">
+    <f:if condition="{data.header}">
+        <h2 class="text-2xl font-bold mb-4">{data.header}</h2>
+    </f:if>
+    
+    <div class="eden-map-container h-96 w-full rounded-lg overflow-hidden shadow-md">
+        <div id="eden-map-{data.uid}" class="w-full h-full"></div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the map
+            const mapElement = document.getElementById('eden-map-{data.uid}');
+            
+            if (mapElement) {
+                // Load Google Maps API
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initEdenMap${data.uid}`;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+                
+                // Define the initialization function
+                window[`initEdenMap${data.uid}`] = function() {
+                    // Default to first marker or center address
+                    let mapCenter = { lat: 52.520008, lng: 13.404954 };
+                    let mapZoom = {data.tx_edensite_map_zoom} || 15;
+                    
+                    // Try to geocode the main address if provided
+                    if ('{data.tx_edensite_map_address -> f:format.htmlspecialchars()}') {
+                        const geocoder = new google.maps.Geocoder();
+                        geocoder.geocode({ address: '{data.tx_edensite_map_address -> f:format.htmlspecialchars()}' }, function(results, status) {
+                            if (status === 'OK' && results[0]) {
+                                mapCenter = results[0].geometry.location;
+                                const map = new google.maps.Map(mapElement, {
+                                    center: mapCenter,
+                                    zoom: mapZoom,
+                                    mapTypeId: '{data.tx_edensite_map_type}' || 'roadmap',
+                                });
+                                
+                                // Add main marker
+                                new google.maps.Marker({
+                                    position: mapCenter,
+                                    map: map,
+                                    title: '{data.tx_edensite_map_address -> f:format.htmlspecialchars()}',
+                                });
+                                
+                                // Add additional markers if any
+                                <f:if condition="{data.tx_edensite_map_markers}">
+                                    <f:for each="{data.tx_edensite_map_markers}" as="marker">
+                                        <f:if condition="{marker.latitude} && {marker.longitude}">
+                                            new google.maps.Marker({
+                                                position: { lat: {marker.latitude}, lng: {marker.longitude} },
+                                                map: map,
+                                                title: '{marker.title -> f:format.htmlspecialchars()}',
+                                                label: '{marker.title -> f:format.substring(start: 0, length: 1) -> f:format.uppercase()}',
+                                                icon: {
+                                                    url: `https://maps.google.com/mapfiles/ms/icons/${marker.color}-dot.png`,
+                                                },
+                                            });
+                                        </f:if>
+                                    </f:for>
+                                </f:if>
+                            }
+                        });
+                    } else if ('{data.tx_edensite_map_markers -> f:count()}') {
+                        // If no main address but markers exist, use first marker as center
+                        <f:for each="{data.tx_edensite_map_markers}" as="marker" iteration="iterator">
+                            <f:if condition="{iterator.isFirst} && {marker.latitude} && {marker.longitude}">
+                                mapCenter = { lat: {marker.latitude}, lng: {marker.longitude} };
+                            </f:if>
+                        </f:for>
+                        
+                        const map = new google.maps.Map(mapElement, {
+                            center: mapCenter,
+                            zoom: mapZoom,
+                            mapTypeId: '{data.tx_edensite_map_type}' || 'roadmap',
+                        });
+                        
+                        // Add all markers
+                        <f:for each="{data.tx_edensite_map_markers}" as="marker">
+                            <f:if condition="{marker.latitude} && {marker.longitude}">
+                                new google.maps.Marker({
+                                    position: { lat: {marker.latitude}, lng: {marker.longitude} },
+                                    map: map,
+                                    title: '{marker.title -> f:format.htmlspecialchars()}',
+                                    label: '{marker.title -> f:format.substring(start: 0, length: 1) -> f:format.uppercase()}',
+                                    icon: {
+                                        url: `https://maps.google.com/mapfiles/ms/icons/${marker.color}-dot.png`,
+                                    },
+                                });
+                            </f:if>
+                        </f:for>
+                    } else {
+                        // Fallback to default center
+                        const map = new google.maps.Map(mapElement, {
+                            center: mapCenter,
+                            zoom: mapZoom,
+                            mapTypeId: '{data.tx_edensite_map_type}' || 'roadmap',
+                        });
+                    }
+                };
+            }
+        });
+    </script>
+</div>
+</html>

@@ -1,0 +1,96 @@
+/* Tailwind-like utility classes */
+.prose {
+    max-width: 65ch;
+}
+
+.prose img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Slider styles */
+.eden-slider-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.eden-slider-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.eden-slide {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+/* Lightbox styles */
+.eden-lightbox-item img {
+    transition: transform 0.3s ease;
+}
+
+.eden-lightbox-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Team styles */
+.eden-team-carousel {
+    position: relative;
+}
+
+.eden-team-track {
+    overflow: hidden;
+}
+
+.eden-team-slides {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.eden-team-slide {
+    flex: 0 0 100%;
+}
+
+@media (min-width: 768px) {
+    .eden-team-slide {
+        flex: 0 0 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .eden-team-slide {
+        flex: 0 0 33.333%;
+    }
+}
+
+/* Quotations styles */
+.eden-quotations-track {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.eden-quotation {
+    flex: 0 0 100%;
+    padding: 0 1rem;
+}
+
+.eden-quotation-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: #e5e7eb;
+}
+
+.eden-quotation-dot.bg-blue-600 {
+    background-color: #2563eb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .eden-team-member-image.md\:w-1\/3 {
+        width: 100%;
+    }
+    
+    .eden-team-member div.md\:w-2\/3 {
+        width: 100%;
+    }
+}

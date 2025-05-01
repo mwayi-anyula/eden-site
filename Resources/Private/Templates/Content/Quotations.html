@@ -1,0 +1,43 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="eden-quotations">
+    <f:if condition="{data.header}">
+        <h2 class="text-2xl font-bold mb-8 text-center">{data.header}</h2>
+    </f:if>
+    
+    <div class="eden-quotations-slider">
+        <div class="eden-quotations-track">
+            <f:for each="{data.tx_edensite_quotation_items}" as="item">
+                <div class="eden-quotation">
+                    <div class="eden-quotation-content bg-white p-8 rounded-lg shadow-md">
+                        <div class="prose max-w-none mb-6">
+                            <f:format.html>{item.quote}</f:format.html>
+                        </div>
+                        <div class="flex items-center">
+                            <f:if condition="{item.image}">
+                                <div class="flex-shrink-0 mr-4">
+                                    <f:image image="{item.image}" width="60" height="60" class="rounded-full"/>
+                                </div>
+                            </f:if>
+                            <div>
+                                <p class="font-bold text-gray-900">{item.author}</p>
+                                <f:if condition="{item.role}">
+                                    <p class="text-sm text-gray-600">{item.role}</p>
+                                </f:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </f:for>
+        </div>
+        
+        <f:if condition="{data.tx_edensite_quotation_items -> f:count()} > 1">
+            <div class="eden-quotations-dots flex justify-center mt-6 space-x-2">
+                <f:for each="{data.tx_edensite_quotation_items}" as="item" iteration="iterator">
+                    <button class="eden-quotation-dot w-3 h-3 rounded-full bg-gray-300 focus:outline-none {f:if(condition: '{iterator.isFirst}', then: 'bg-blue-600')}" 
+                            data-index="{iterator.index}"></button>
+                </f:for>
+            </div>
+        </f:if>
+    </div>
+</div>
+</html>

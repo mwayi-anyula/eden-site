@@ -1,0 +1,67 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="eden-blog">
+    <f:if condition="{data.header}">
+        <h2 class="text-3xl font-bold mb-8">{data.header}</h2>
+    </f:if>
+    
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <f:for each="{posts}" as="post">
+            <article class="eden-blog-post bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <f:if condition="{post.image}">
+                    <div class="eden-blog-post-image h-48 overflow-hidden">
+                        <f:link.page pageUid="{post.url}">
+                            <f:image image="{post.image}" width="600" height="300" class="w-full h-full object-cover"/>
+                        </f:link.page>
+                    </div>
+                </f:if>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">
+                        <f:link.page pageUid="{post.url}" class="text-gray-900 hover:text-blue-600">
+                            {post.title}
+                        </f:link.page>
+                    </h3>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <f:format.date format="d.m.Y">{post.date}</f:format.date>
+                    </div>
+                    <f:if condition="{post.teaser}">
+                        <p class="text-gray-700 mb-4">{post.teaser}</p>
+                    </f:if>
+                    <f:link.page pageUid="{post.url}" class="text-blue-600 hover:text-blue-800 font-medium">
+                        Read more →
+                    </f:link.page>
+                </div>
+            </article>
+        </f:for>
+    </div>
+    
+    <f:if condition="{pagination}">
+        <nav class="eden-blog-pagination mt-8 flex justify-center">
+            <ul class="flex space-x-2">
+                <f:if condition="{pagination.hasPreviousPage}">
+                    <li>
+                        <f:link.page pageUid="{data.uid}" additionalParams="{page: pagination.currentPage - 1}" class="px-4 py-2 border rounded hover:bg-gray-100">
+                            Previous
+                        </f:link.page>
+                    </li>
+                </f:if>
+                
+                <f:for each="{1..pagination.totalPages}" as="page">
+                    <li>
+                        <f:link.page pageUid="{data.uid}" additionalParams="{page: page}" class="px-4 py-2 border rounded {f:if(condition: '{page} == {pagination.currentPage}', then: 'bg-blue-600 text-white', else: 'hover:bg-gray-100')}">
+                            {page}
+                        </f:link.page>
+                    </li>
+                </f:for>
+                
+                <f:if condition="{pagination.hasNextPage}">
+                    <li>
+                        <f:link.page pageUid="{data.uid}" additionalParams="{page: pagination.currentPage + 1}" class="px-4 py-2 border rounded hover:bg-gray-100">
+                            Next
+                        </f:link.page>
+                    </li>
+                </f:if>
+            </ul>
+        </nav>
+    </f:if>
+</div>
+</html>

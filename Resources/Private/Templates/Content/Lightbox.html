@@ -1,0 +1,29 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="eden-lightbox">
+    <f:if condition="{data.header}">
+        <h2 class="text-2xl font-bold mb-4">{data.header}</h2>
+    </f:if>
+    
+    <f:if condition="{data.bodytext}">
+        <div class="prose mb-6">
+            <f:format.html>{data.bodytext}</f:format.html>
+        </div>
+    </f:if>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <f:for each="{data.assets}" as="file">
+            <div class="eden-lightbox-item">
+                <a href="{file.originalResource.publicUrl}" 
+                   class="block group" 
+                   data-lightbox="eden-lightbox-{data.uid}" 
+                   data-title="{file.title}">
+                    <f:image image="{file}" width="400" height="300" class="w-full h-48 object-cover rounded-lg shadow-md group-hover:shadow-lg transition-shadow"/>
+                </a>
+                <f:if condition="{file.description}">
+                    <p class="mt-2 text-sm text-gray-600">{file.description}</p>
+                </f:if>
+            </div>
+        </f:for>
+    </div>
+</div>
+</html>
