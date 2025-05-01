@@ -1,5 +1,5 @@
 <?php
-namespace Vendor\EdenSite\DataProcessing;
+namespace MwayiAnyula\EdenSite\DataProcessing;
 
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;

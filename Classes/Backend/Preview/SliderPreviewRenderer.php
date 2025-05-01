@@ -1,5 +1,5 @@
 <?php
-namespace Vendor\EdenSite\Backend\Preview;
+namespace MwayiAnyula\EdenSite\Backend\Preview;
 
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;

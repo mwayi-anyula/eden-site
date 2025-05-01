@@ -27,7 +27,7 @@ tt_content {
     eden_blog {
         templateName = Blog
         dataProcessing {
-            10 = Vendor\EdenSite\DataProcessing\BlogProcessor
+            10 = MwayiAnyula\EdenSite\DataProcessing\BlogProcessor
         }
     }
     

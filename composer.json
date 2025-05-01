@@ -1,5 +1,5 @@
 {
-    "name": "vendor/eden-site",
+    "name": "mwayi-anyula/eden-site",
     "description": "Eden Site Package",
     "type": "typo3-cms-extension",
     "license": "GPL-2.0-or-later",
@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vendor\\EdenSite\\": "Classes/"
+            "MwayiAnyula\\EdenSite\\": "Classes/"
         }
     },
     "extra": {

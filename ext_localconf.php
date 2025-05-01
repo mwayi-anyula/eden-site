@@ -4,7 +4,7 @@ defined('TYPO3') or die();
 call_user_func(function() {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['dataProcessing'][
         'eden_site_blog'
-    ] = \Vendor\EdenSite\DataProcessing\BlogProcessor::class;
+    ] = \MwayiAnyula\EdenSite\DataProcessing\BlogProcessor::class;
 
     
     // Register content elements
